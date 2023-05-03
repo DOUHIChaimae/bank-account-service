@@ -1,13 +1,13 @@
-package ma.enset.tp6bankaccountservice.entities;
+package ma.enset.bankaccountservice.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.enset.tp6bankaccountservice.enums.AccountType;
-
+import ma.enset.bankaccountservice.enums.AccountType;
 import java.util.Date;
+
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 @Builder
@@ -21,5 +21,4 @@ public class BankAccount {
     private AccountType type;
     @ManyToOne
     private Customer customer;
-
 }

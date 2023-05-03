@@ -1,10 +1,10 @@
-package ma.enset.tp6bankaccountservice.dtos;
+package ma.enset.bankaccountservice.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.enset.tp6bankaccountservice.enums.AccountType;
+import ma.enset.bankaccountservice.enums.AccountType;
 
 import java.util.Date;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder

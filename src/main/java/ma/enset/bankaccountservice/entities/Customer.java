@@ -1,4 +1,4 @@
-package ma.enset.tp6bankaccountservice.entities;
+package ma.enset.bankaccountservice.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

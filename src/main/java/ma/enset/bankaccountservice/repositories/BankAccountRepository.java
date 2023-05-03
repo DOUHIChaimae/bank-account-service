@@ -1,7 +1,7 @@
-package ma.enset.tp6bankaccountservice.repositories;
+package ma.enset.bankaccountservice.repositories;
 
-import ma.enset.tp6bankaccountservice.entities.BankAccount;
-import ma.enset.tp6bankaccountservice.enums.AccountType;
+import ma.enset.bankaccountservice.entities.BankAccount;
+import ma.enset.bankaccountservice.enums.AccountType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -13,6 +13,4 @@ import java.util.List;
 public interface BankAccountRepository extends JpaRepository<BankAccount,String> {
        @RestResource(path = "/byType")
         List<BankAccount> findByType(@Param("t") AccountType type);
-
-        //if we use the RestController, we need to add a method that invoke this method
 }

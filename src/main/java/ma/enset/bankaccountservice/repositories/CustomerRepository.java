@@ -1,6 +1,6 @@
-package ma.enset.tp6bankaccountservice.repositories;
+package ma.enset.bankaccountservice.repositories;
 
-import ma.enset.tp6bankaccountservice.entities.Customer;
+import ma.enset.bankaccountservice.entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

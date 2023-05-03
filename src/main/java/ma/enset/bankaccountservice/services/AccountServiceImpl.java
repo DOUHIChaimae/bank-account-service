@@ -1,36 +1,19 @@
-package ma.enset.tp6bankaccountservice.services;
+package ma.enset.bankaccountservice.services;
 
-import ma.enset.tp6bankaccountservice.dtos.BankAccountRequestDTO;
-import ma.enset.tp6bankaccountservice.dtos.BankAccountResponseDto;
-import ma.enset.tp6bankaccountservice.entities.BankAccount;
-import ma.enset.tp6bankaccountservice.mappers.AccountMapper;
-import ma.enset.tp6bankaccountservice.repositories.BankAccountRepository;
+import ma.enset.bankaccountservice.dtos.BankAccountRequestDTO;
+import ma.enset.bankaccountservice.dtos.BankAccountResponseDto;
+import ma.enset.bankaccountservice.entities.BankAccount;
+import ma.enset.bankaccountservice.mappers.AccountMapper;
+import ma.enset.bankaccountservice.repositories.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
-/**
- * Mapping =>
- * <p>
- * BankAccount bankAccountEntity = BankAccount.builder()
- * .id(UUID.randomUUID().toString()) //mapping
- * .createdAt(new Date())
- * .balance(bankAccountRequestDto.getBalance())
- * .currency(bankAccountRequestDto.getCurrency())
- * .type(bankAccountRequestDto.getType())
- * .build();
- * <p>
- * BankAccountResponseDto bankAccountResponseDto1 = new BankAccountResponseDto().builder()
- * .id(savedBankAccountEntity.getId())
- * .type(savedBankAccountEntity.getType())
- * .createdAt(savedBankAccountEntity.getCreatedAt())
- * .balance(savedBankAccountEntity.getBalance())
- * .currency(savedBankAccountEntity.getCurrency())
- * .build();
- */
 
 @Service
 @Transactional
@@ -43,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public BankAccountResponseDto addAccount(BankAccountRequestDTO bankAccountRequestDto) {
         BankAccount bankAccount = BankAccount.builder()
-                .id(UUID.randomUUID().toString()) //mapping
+                .id(UUID.randomUUID().toString())
                 .createdAt(new Date())
                 .balance(bankAccountRequestDto.getBalance())
                 .currency(bankAccountRequestDto.getCurrency())
@@ -66,5 +49,26 @@ public class AccountServiceImpl implements AccountService {
         BankAccount savedBankAccount = bankAccountRepository.save(bankAccount);
         BankAccountResponseDto bankAccountResponseDto = accountMapper.fromBankAccount(savedBankAccount);
         return bankAccountResponseDto;
+    }
+
+    @Override
+    public List<BankAccountResponseDto> getAllAccounts() {
+        List<BankAccount> accounts = bankAccountRepository.findAll();
+        List<BankAccountResponseDto> responseDtoList = new ArrayList<>();
+        for (BankAccount account : accounts) {
+            BankAccountResponseDto responseDto = new BankAccountResponseDto();
+            responseDto.setId(account.getId());
+            responseDto.setType(account.getType());
+            responseDto.setCurrency(account.getCurrency());
+            responseDto.setBalance(account.getBalance());
+            responseDtoList.add(responseDto);
+        }
+        return responseDtoList;
+    }
+    @Override
+    public BankAccountResponseDto getAccountById(String id){
+        BankAccount bankAccount = bankAccountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(String.format("Account %s not found", id)));
+        return accountMapper.fromBankAccount(bankAccount);
     }
 }

@@ -1,13 +1,18 @@
-package ma.enset.tp6bankaccountservice.services;
+package ma.enset.bankaccountservice.services;
 
-import ma.enset.tp6bankaccountservice.dtos.BankAccountRequestDTO;
-import ma.enset.tp6bankaccountservice.dtos.BankAccountResponseDto;
+import ma.enset.bankaccountservice.dtos.BankAccountRequestDTO;
+import ma.enset.bankaccountservice.dtos.BankAccountResponseDto;
+
+import java.util.List;
 
 public interface AccountService {
-    /**
-     *Adding an account is not just adding it to the database but checking business rules :)
-     */
 
-    public BankAccountResponseDto addAccount(BankAccountRequestDTO bankAccountDTO);
-    public BankAccountResponseDto updateAccount(String id,BankAccountRequestDTO bankAccountDTO);
+
+    BankAccountResponseDto addAccount(BankAccountRequestDTO bankAccountDTO);
+
+    BankAccountResponseDto updateAccount(String id, BankAccountRequestDTO bankAccountDTO);
+
+    List<BankAccountResponseDto> getAllAccounts();
+
+    BankAccountResponseDto getAccountById(String id);
 }

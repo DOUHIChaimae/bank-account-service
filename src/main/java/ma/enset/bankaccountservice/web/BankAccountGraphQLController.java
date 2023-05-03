@@ -1,15 +1,12 @@
-package ma.enset.tp6bankaccountservice.web;
+package ma.enset.bankaccountservice.web;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import ma.enset.tp6bankaccountservice.dtos.BankAccountRequestDTO;
-import ma.enset.tp6bankaccountservice.dtos.BankAccountResponseDto;
-import ma.enset.tp6bankaccountservice.entities.BankAccount;
-import ma.enset.tp6bankaccountservice.entities.Customer;
-import ma.enset.tp6bankaccountservice.repositories.BankAccountRepository;
-import ma.enset.tp6bankaccountservice.repositories.CustomerRepository;
-import ma.enset.tp6bankaccountservice.services.AccountService;
+import ma.enset.bankaccountservice.dtos.BankAccountRequestDTO;
+import ma.enset.bankaccountservice.dtos.BankAccountResponseDto;
+import ma.enset.bankaccountservice.entities.BankAccount;
+import ma.enset.bankaccountservice.entities.Customer;
+import ma.enset.bankaccountservice.repositories.BankAccountRepository;
+import ma.enset.bankaccountservice.repositories.CustomerRepository;
+import ma.enset.bankaccountservice.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -59,9 +56,5 @@ public class BankAccountGraphQLController {
         return customerRepository.findAll();
     }
 }
-
-/*
-record BankAccountDTO{
-*/
 
 

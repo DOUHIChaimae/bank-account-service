@@ -1,14 +1,11 @@
-package ma.enset.tp6bankaccountservice.web;
+package ma.enset.bankaccountservice.web;
 
-import ma.enset.tp6bankaccountservice.dtos.BankAccountRequestDTO;
-import ma.enset.tp6bankaccountservice.dtos.BankAccountResponseDto;
-import ma.enset.tp6bankaccountservice.entities.BankAccount;
-import ma.enset.tp6bankaccountservice.mappers.AccountMapper;
-import ma.enset.tp6bankaccountservice.repositories.BankAccountRepository;
-import ma.enset.tp6bankaccountservice.services.AccountService;
+import ma.enset.bankaccountservice.dtos.BankAccountRequestDTO;
+import ma.enset.bankaccountservice.dtos.BankAccountResponseDto;
+import ma.enset.bankaccountservice.mappers.AccountMapper;
+import ma.enset.bankaccountservice.repositories.BankAccountRepository;
+import ma.enset.bankaccountservice.services.AccountService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,21 +24,14 @@ public class AccountRestController {
 
 
     @GetMapping("/bankAccounts")
-    public List<BankAccount> bankAccounts() {
-        return bankAccountRepository.findAll();
+    public List<BankAccountResponseDto> bankAccounts() {
+        return accountService.getAllAccounts();
     }
 
     @GetMapping("/bankAccounts/{id}")
-    public BankAccount bankAccount(@PathVariable String id) {
-        return bankAccountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(String.format("Account %s not found", id)));
+    public BankAccountResponseDto bankAccount(@PathVariable String id) {
+        return accountService.getAccountById(id);
     }
-
-    /*@PostMapping("/bankAccounts")
-        public BankAccount save(@RequestBody BankAccount bankAccount) {
-            if(bankAccount.getId() == null) bankAccount.setId(UUID.randomUUID().toString());
-            return bankAccountRepository.save(bankAccount);
-    }*/
 
     @PostMapping("/bankAccounts")
     public BankAccountResponseDto save(@RequestBody BankAccountRequestDTO requestDTO) {
@@ -49,13 +39,8 @@ public class AccountRestController {
     }
 
     @PutMapping("/bankAccounts/{id}")
-    public BankAccount update(@PathVariable String id, @RequestBody BankAccount bankAccount) {
-        BankAccount account = bankAccountRepository.findById(id).orElseThrow();
-        if (bankAccount.getBalance() != null) account.setBalance(bankAccount.getBalance());
-        if (bankAccount.getCreatedAt() != null) account.setCreatedAt(new Date());
-        if (bankAccount.getCurrency() != null) account.setCurrency(bankAccount.getCurrency());
-        if (bankAccount.getType() != null) account.setType(bankAccount.getType());
-        return bankAccountRepository.save(account);
+    public BankAccountResponseDto update(@PathVariable String id, @RequestBody BankAccountRequestDTO bankAccountRequestDTO) {
+        return accountService.updateAccount(id,bankAccountRequestDTO);
     }
 
     @DeleteMapping("/bankAccounts/{id}")

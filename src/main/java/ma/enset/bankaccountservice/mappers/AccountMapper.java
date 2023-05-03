@@ -1,8 +1,7 @@
-package ma.enset.tp6bankaccountservice.mappers;
+package ma.enset.bankaccountservice.mappers;
 
-import ma.enset.tp6bankaccountservice.dtos.BankAccountRequestDTO;
-import ma.enset.tp6bankaccountservice.dtos.BankAccountResponseDto;
-import ma.enset.tp6bankaccountservice.entities.BankAccount;
+import ma.enset.bankaccountservice.dtos.BankAccountResponseDto;
+import ma.enset.bankaccountservice.entities.BankAccount;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package ma.enset.tp6bankaccountservice.exceptions;
+package ma.enset.bankaccountservice.exceptions;
 
 import graphql.ErrorClassification;
 import graphql.GraphQLError;
